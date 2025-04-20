@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Merriweather } from "next/font/google";
 import "./globals.css";
 import { ThemeModeScript } from 'flowbite-react';
 import Background from "@/components/background/Background";
-import NavBar from "@/components/navbar/NavBar";
+import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +12,11 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const merriWeather = Merriweather({
+  weight: '400',
   subsets: ["latin"],
 });
 
@@ -33,18 +38,13 @@ export default function RootLayout({
         <ThemeModeScript />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-full` }
       >
         <Background/>
-        <header>
-          <div className="bg-black">
-            <NavBar/>
-          </div>
-        </header>
-        
-        
-        
-        {children}
+        <Header/>
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );
