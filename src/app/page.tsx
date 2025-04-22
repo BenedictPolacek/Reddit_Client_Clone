@@ -1,6 +1,5 @@
-import { Card } from "flowbite-react";
-import { HiUserCircle } from "react-icons/hi";
-import { HiOutlineClock } from "react-icons/hi";
+import Post from "@/components/posts/Post";
+import PostLayout from "@/components/posts/PostLayout";
 import { v4 as uuidv4 } from 'uuid';
 
 export default function Home() {
@@ -11,7 +10,7 @@ export default function Home() {
       title: 'Noteworthy technology acquisitions 2021',
       selftext: 'Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.',
       is_video: false,
-      created: 1745215428,
+      created: 1745257120,
       thumbnail: 'self',
       media: null,
       author_fullname: 't2_b6is71st',
@@ -21,7 +20,7 @@ export default function Home() {
       title: 'Noteworthy technology acquisitions 2021',
       selftext: 'Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.',
       is_video: true,
-      created: 1745215428,
+      created: 1745257120,
       thumbnail: 'self',
       media: {
         reddit_video: {
@@ -85,137 +84,50 @@ export default function Home() {
       author_fullname: 't2_b6is71st',
     },
   ]
-  const CardArray = data.map((post) => {
+  const PostArray = data.map((post) => {
     if(post.is_video){
       return  (
-        <Card className="max-w-140 m-8" key={uuidv4()}>
-          <div>
-            <div className="flex justify-between mb-1 text-base">
-              <div className="flex">
-                <HiUserCircle className="h-full mr-1 text-neutral-400"/>
-                <p className="text-neutral-400">{post.author_fullname}</p>
-              </div>
-              <div className="flex">
-                <HiOutlineClock className="text-neutral-500 h-full ml-1 mr-1"/>
-                <p className="text-neutral-500">5 days ago</p>
-              </div> 
-            </div>
-            <video className="w-full rounded-md" controls>
-              <source src={post.media?.reddit_video.fallback_url} className="block"/>
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {post.title}
-          </h5>
-          {
-            post.selftext ?           
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              {post.selftext}
-            </p> : null
-          }
-        </Card>
+        <Post 
+          author={post.author_fullname} 
+          title={post.title} text={post.selftext} 
+          createdAt={post.created} 
+          videoUrl={post.media?.reddit_video.fallback_url}
+          key={uuidv4()}
+        />
       )
     } 
     if(post.url.endsWith('.png') || post.url.endsWith('.jpg') || post.url.endsWith('.jpeg') || post.url.endsWith('.svg')){
       return (
-        <Card className="max-w-140 m-8" key={uuidv4()}>
-          <div>
-            <div className="flex justify-between mb-1 text-base">
-              <div className="flex">
-                <HiUserCircle className="h-full mr-1 text-neutral-400"/>
-                <p className="text-neutral-400">{post.author_fullname}</p>
-              </div>
-              <div className="flex">
-                <HiOutlineClock className="text-neutral-500 h-full ml-1 mr-1"/>
-                <p className="text-neutral-500">5 days ago</p>
-              </div> 
-            </div>
-            <img src={post.url} className="rounded-md"/>
-          </div>
-          <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {post.title}
-          </h5>
-          {
-            post.selftext ?           
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              {post.selftext}
-            </p> : null
-          }
-        </Card>
+        <Post 
+          author={post.author_fullname} 
+          title={post.title} text={post.selftext} 
+          createdAt={post.created} 
+          pictureUrl={post.url}
+          key={uuidv4()}
+        />
       )
     }
     if(post.thumbnail.endsWith('.png') || post.thumbnail.endsWith('.jpg') || post.thumbnail.endsWith('.jpeg') || post.thumbnail.endsWith('.svg')){
       return (
-        <Card className="max-w-140 m-8" key={uuidv4()}>
-          <div>
-            <div className="flex justify-between mb-1 text-base">
-              <div className="flex">
-                <HiUserCircle className="h-full mr-1 text-neutral-400"/>
-                <p className="text-neutral-400">{post.author_fullname}</p>
-              </div>
-              <div className="flex">
-                <HiOutlineClock className="text-neutral-500 h-full ml-1 mr-1"/>
-                <p className="text-neutral-500">5 days ago</p>
-              </div> 
-            </div>
-            
-          </div>
-          <div>
-            <img src={post.thumbnail} className="float-right rounded-md m-1"/>
-            <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {post.title}
-            </h5>
-          </div>
-          {
-            post.selftext ?           
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              {post.selftext}
-            </p> : null
-          }
-        </Card>
-      )
-    } else {
-      return (
-        <Card className="max-w-140 m-8" key={uuidv4()}>
-          <div>
-            <div className="flex justify-between mb-1 text-base">
-              <div className="flex">
-                <HiUserCircle className="h-full mr-1 text-neutral-400"/>
-                <p className="text-neutral-400">{post.author_fullname}</p>
-              </div>
-              <div className="flex">
-                <HiOutlineClock className="text-neutral-500 h-full ml-1 mr-1"/>
-                <p className="text-neutral-500">5 days ago</p>
-              </div> 
-            </div>
-          </div>
-          <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {post.title}
-          </h5>
-          {
-            post.selftext ?           
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              {post.selftext}
-            </p> : null
-          }
-        </Card>
+        <Post
+          author={post.author_fullname} 
+          title={post.title} text={post.selftext} 
+          createdAt={post.created} 
+          thumbnailUrl={post.thumbnail}
+          key={uuidv4()}
+        />
       )
     }
+      return (
+        <Post 
+          author={post.author_fullname} 
+          title={post.title} text={post.selftext} 
+          createdAt={post.created} 
+          key={uuidv4()}
+        />
+      )
   })
-  CardArray
   return (
-    <div className="w-full flex justify-center">
-      <div className="w-140">
-        {CardArray.filter((_, index) => {
-          return index % 2 === 0
-        })}
-      </div>
-      <div className="w-140">
-        {CardArray.filter((_, index) => {
-          return index % 2 === 1
-        })}
-      </div>
-    </div>
+    <PostLayout Posts={PostArray}/>
   );
 }
