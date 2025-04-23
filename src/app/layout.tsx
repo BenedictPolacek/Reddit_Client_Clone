@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Merriweather } from "next/font/google";
 import "./globals.css";
-import { DarkThemeToggle, ThemeModeScript } from 'flowbite-react';
+
 import Background from "@/components/background/Background";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-full` }
       >
@@ -42,6 +44,7 @@ export default function RootLayout({
         <main>
           {children}
         </main>
+        <Footer/>
       </body>
     </html>
   );
