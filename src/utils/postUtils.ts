@@ -14,3 +14,7 @@ export function getTimeAgo(createdAt: number): string {
     const seconds = minutes * 60
     return `${Math.floor(seconds)} seconds ago`;
 }
+
+export function isPictureFormat(url: string){
+    return url.endsWith('.png') || url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.svg')
+}
