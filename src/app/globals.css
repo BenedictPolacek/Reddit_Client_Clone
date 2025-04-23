@@ -20,5 +20,5 @@
   }
   @theme {
     --breakpoint-xs: 23rem;
-
+    --breakpoint-laptop: 85rem;
   }

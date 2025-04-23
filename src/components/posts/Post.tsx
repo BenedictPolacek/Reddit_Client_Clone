@@ -8,7 +8,7 @@ export default function Post({author, createdAt, title, text, videoUrl, pictureU
     :{author: string, createdAt: number, title: string, text?: string, videoUrl?: string, pictureUrl?: string, thumbnailUrl?: string}) {
     const postedAgo = getTimeAgo(createdAt);
   return (
-    <Card className="max-w-140 m-8">
+    <Card className="max-w-200 m-8">
         <PostHeader author={author} postedAgo={postedAgo} videoUrl={videoUrl} pictureUrl={pictureUrl}/>
         <PostTitle title={title} thumbnailUrl={thumbnailUrl}/>
         <PostText text={text}/>

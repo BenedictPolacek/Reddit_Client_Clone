@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Merriweather } from "next/font/google";
 import "./globals.css";
-import { ThemeModeScript } from 'flowbite-react';
+import { DarkThemeToggle, ThemeModeScript } from 'flowbite-react';
 import Background from "@/components/background/Background";
 import Header from "@/components/Header";
 
@@ -34,9 +34,6 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <ThemeModeScript />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-full` }
       >

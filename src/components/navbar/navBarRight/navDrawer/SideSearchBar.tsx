@@ -5,7 +5,7 @@ import { HiSearch } from "react-icons/hi";
 
 export default function SideSearchBar() {
   return (
-    <form className="pb-3 md:hidden">
+    <form className="pb-3 sm:hidden">
         <TextInput icon={HiSearch} type="search" placeholder="Search" required size={32} />
     </form>
   )
