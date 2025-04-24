@@ -1,5 +1,5 @@
 import { Sidebar, SidebarItemGroup, SidebarItems } from "flowbite-react";
-import SideSearchBar from "./SideSearchBar";
+import SideSearchBar from "./DrawerSearchBar";
 import TopicItems from "./TopicsItems";
 
 export default function NavSideBar() {

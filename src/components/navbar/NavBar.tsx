@@ -1,14 +1,14 @@
 import { Navbar } from "flowbite-react"
 import LeftNavbarSide from "./NavBarLeft"
 import RightNavbarSide from "./NavBarRight"
-import NavSideBar from "./navBarRight/navDrawer/NavSideBar"
+import DrawerSideBar from "./navBarRight/navDrawer/DrawerSideBar"
 
 export default function NavBar() {
   return (
     <Navbar fluid rounded>
           <LeftNavbarSide/>
           <RightNavbarSide>
-            <NavSideBar/>
+            <DrawerSideBar/>
           </RightNavbarSide>
     </Navbar>
   )
