@@ -36,7 +36,7 @@ export const topics: TopicHead[] = [
     {'Technology': [
         '3D Printing',
         'Artificial Intelligence & Machine Learning',
-        'Computers and Hardware',
+        'Computers & Hardware',
         'Consumer Electronics',
         'DIY Electronics',
         'Programming',
