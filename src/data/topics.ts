@@ -70,6 +70,7 @@ export const topics: TopicHead[] = [
         'TV News & Discussion',
 
     ]},
+    'Popular',
     'Anime',
     'Arts',
     'Business',

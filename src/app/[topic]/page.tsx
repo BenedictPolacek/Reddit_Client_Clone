@@ -4,7 +4,7 @@ import { isPictureFormat } from "@/utils/postUtils";
 import { v4 as uuidv4 } from 'uuid';
 
 export default function Home() {
-
+  
   const data = [
     {
       url: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png',
