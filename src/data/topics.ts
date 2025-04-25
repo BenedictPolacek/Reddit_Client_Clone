@@ -1,91 +1,82 @@
-type TopicsGroup = {
-    [key: string]: string[],
+export type TopicObject ={
+    name: string, 
+    endpoint: string,
 }
-type TopicHead = string | TopicsGroup
+export type TopicsGroup = {
+    [key: string]: TopicObject[],
+}
+export type TopicHead = TopicObject | TopicsGroup
 
 export const topics: TopicHead[] = [
-    {'Internet Culture (Viral)': [
-        'Amazing',
-        'Animals & Pets',
-        'Cringe & Facepalm',
-        'Funny',
-        'Interesting',
-        'Memes',
-        'Oddly Satisfying',
-        'Reddit Meta',
-        'Wholesome & Heartwarming',
-    ]},
-    {'Games': [
-        'Action Games',
-        'Adventure Games',
-        'Esports',
-        'Gaming Consoles & Gear',
-        'Gaming News & Discussion',
-        'Mobile Games',
-        'Other Games',
-        'Role-Playing Games',
-        'Simulation Games',
-        'Sports & Racing Games',
-        'Strategy Games',
-        'Tabletop Games',
-    ]},
-    {'Q&As': [
-        'Q&As',
-        'Stories & Confessions',
-    ]},
-    {'Technology': [
-        '3D Printing',
-        'Artificial Intelligence & Machine Learning',
-        'Computers & Hardware',
-        'Consumer Electronics',
-        'DIY Electronics',
-        'Programming',
-        'Software & Apps',
-        'Streaming Services',
-        'Tech News & Discussion',
-        'Virtual & Augmented Reality',
-    ]},
-    {'Pop Culture': [
-        'Celebrities',
-        'Creators & Influencers',
-        'Generations & Nostalgia',
-        'Podcast',
-        'Streamers',
-        'Tarot & Astrology',
-    ]},
-    {'Movies & TV': [
-        'Action Movies & Series',
-        'Animated Movies & Series',
-        'Comedy Movies & Series',
-        'Crime, Mystery, & Thriller Movies & Series',
-        'Documentary Movies & Series',
-        'Drama Movies & Series',
-        'Fantasy Movies & Series',
-        'Horror Movies & Series',
-        'Movie News & Discussion',
-        'Reality TV',
-        'Romance Movies & Series',
-        'Sci-Fi Movies & Series',
-        'Superhero Movies & Series',
-        'TV News & Discussion',
-
-    ]},
-    'Popular',
-    'Anime',
-    'Arts',
-    'Business',
-    'Collectibles & Other Hobbies',
-    'Fashion & Beauty',
-    'Food and Drink',
-    'Home & Garden',
-    'Humanities & Law',
-    'Music',
-    'Nature & Outdoors',
-    'News & Politics',
-    'Places & Travel',
-    'Science',
-    'Sports',
-    'Spooky',
-    'Vehicles',
-    'Wellness',
+  {
+    "Internet Culture (Viral)": [
+      { name: "Amazing", endpoint: "Amazing" },
+      { name: "Animals_&_Pets", endpoint: "AnimalsBeingDerps" },
+      { name: "Cringe_&_Facepalm", endpoint: "Cringepics" },
+      { name: "Funny", endpoint: "Funny" },
+      { name: "Interesting", endpoint: "Interestingasfuck" },
+      { name: "Memes", endpoint: "memes" },
+      { name: "Oddly_Satisfying", endpoint: "Satisfyingasfuck" },
+      { name: "Reddit_Meta", endpoint: "reddit.com" },
+      { name: "Wholesome_&_Heartwarming", endpoint: "wholesome" },
+      { name: "Stories_&_Confessions", endpoint: "stories" }
+    ]
+  },
+  {
+    "Games": [
+      { name: "Adventure_Games", endpoint: "adventuregames" },
+      { name: "Role-Playing_Games", endpoint: "rpg" },
+      { name: "Esports", endpoint: "esports" },
+      { name: "Gaming_News_&_Discussion", endpoint: "gamingnews" },
+      { name: "Mobile_Games", endpoint: "MobileGaming" },
+      { name: "Other_Games", endpoint: "Games" },
+      { name: "Simulation_Games", endpoint: "SimulationGaming" },
+      { name: "Sports_&_Racing_Games", endpoint: "racinggames" },
+      { name: "Strategy_Games", endpoint: "StrategyGames" },
+      { name: "Tabletop_Games", endpoint: "tabletopgamedesign" }
+    ]
+  },
+  {
+    "Technology": [
+      { name: "3D_Printing", endpoint: "3Dprinting" },
+      { name: "Artificial_Intelligence", endpoint: "ArtificialInteligence" },
+      { name: "Machine_Learning", endpoint: "MachineLearning" },
+      { name: "Computers_&_Hardware", endpoint: "hardware" },
+      { name: "Consumer_Electronics", endpoint: "electronics" },
+      { name: "DIY_Electronics", endpoint: "DIYElectronicCircuits" },
+      { name: "Programming", endpoint: "Programming" },
+      { name: "Software_&_Apps", endpoint: "softwaregore" },
+      { name: "Tech_News_&_Discussion", endpoint: "technews" },
+      { name: "Virtual_&_Augmented_Reality", endpoint: "virtualreality" }
+    ]
+  },
+  {
+    "Pop Culture": [
+      { name: "Celebrities", endpoint: "celebrities" },
+      { name: "Creators_&_Influencers", endpoint: "Influencersinthewild" },
+      { name: "Generations_&_Nostalgia", endpoint: "nostalgia" },
+      { name: "Podcast", endpoint: "podcasts" },
+      { name: "Streamers", endpoint: "Streamers" },
+      { name: "Astrology", endpoint: "astrology" }
+    ]
+  },
+  { name: "Popular", endpoint: "popular" },
+  { name: "Anime", endpoint: "anime" },
+  { name: "Arts", endpoint: "artstore" },
+  { name: "Business", endpoint: "business" },
+  { name: "Collectibles_&_Other_Hobbies", endpoint: "Hobbies" },
+  { name: "Fashion_&_Beauty", endpoint: "fashion" },
+  { name: "Food_and_Drink", endpoint: "food" },
+  { name: "Home_&_Garden", endpoint: "Garten" },
+  { name: "Humanities_&_Law", endpoint: "law" },
+  { name: "Music", endpoint: "Music" },
+  { name: "Movies", endpoint: "movies" },
+  { name: "Nature_&_Outdoors", endpoint: "NatureIsFuckingLit" },
+  { name: "News", endpoint: "news" },
+  { name: "Politics", endpoint: "politics" },
+  { name: "Places_&_Travel", endpoint: "travel" },
+  { name: "Science", endpoint: "science" },
+  { name: "Sports", endpoint: "sports" },
+  { name: "Spooky", endpoint: "spooky_stories" },
+  { name: "Cars", endpoint: "cars" }
 ]
