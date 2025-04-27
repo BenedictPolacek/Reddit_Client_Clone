@@ -1,11 +1,19 @@
-import Post from "@/components/posts/Post";
+'use client'
 import PostLayout from "@/components/posts/PostLayout";
-import { isPictureFormat } from "@/utils/postUtils";
-import { v4 as uuidv4 } from 'uuid';
+import { useGetRedditDataQuery } from "../store";
+import { use } from "react";
+import { searchForEndpoint } from "@/utils/topicUtils";
 
-export default function Home() {
-  
-  const data = [
+
+export default function Home({params}:{ params: Promise<{ topic: string }>} ) {
+  const { topic } = use(params);
+  const topicEndpoint = searchForEndpoint(decodeURIComponent(topic))
+  if(!topicEndpoint) throw Error('');
+  const { data, isLoading, isError } = useGetRedditDataQuery({topic: topicEndpoint})
+  if(isLoading) return <div>is loading</div>
+  if(isError) throw Error('');
+  if(!data) return <div>no data returned</div>
+  /*const datamy = [
     {
       url: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png',
       title: 'Noteworthy technology acquisitions 2021',
@@ -84,27 +92,8 @@ export default function Home() {
       media: null,
       author_fullname: 't2_b6is71st',
     },
-  ]
-  const PostArray = data.map((post) => {
-    const baseProps = {
-        author: post.author_fullname,
-        title: post.title,
-        text: post.selftext,
-        createdAt: post.created,
-    };
-    const isPicture = isPictureFormat(post.url);
-    const isThumbnail = isPictureFormat(post.thumbnail)
-    if(post.is_video){
-      return <Post {...baseProps} videoUrl={post.media?.reddit_video.fallback_url} key={uuidv4()}/>
-    } 
-    if(isPicture){
-      return <Post {...baseProps} pictureUrl={post.url} key={uuidv4()}/>
-    }
-    if(isThumbnail){
-      return <Post {...baseProps} thumbnailUrl={post.thumbnail} key={uuidv4()}/>
-    }
-    return <Post {...baseProps} key={uuidv4()}/>
-  })
+  ]*/
+  const PostArray = data.children;
   return (
     <PostLayout Posts={PostArray}/>
   );
