@@ -1,7 +1,6 @@
-
-export default function PostTitle({title, thumbnailUrl}:{title: string, thumbnailUrl?: string}) {
+export default function PostTitle({title, thumbnailUrl, lastPostRef}:{title: string, thumbnailUrl?: string, lastPostRef?:(node?: Element | null) => void}) {
   return (
-    <div>
+    <div ref={lastPostRef} >
       {
         thumbnailUrl ?
           <img src={thumbnailUrl} className="float-right rounded-md m-1"/>

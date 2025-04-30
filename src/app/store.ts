@@ -28,7 +28,7 @@ const redditApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://www.reddit.com/' }),
   endpoints: (build) => ({
     getRedditData: build.query<RedditApiResponse, {topic: string, after?: string}>({
-      query: ({topic, after}) => `r/${topic}.json?limit=20&after=${after}`,
+      query: ({topic, after}) => `r/${topic}.json?limit=10&after=${after}`,
       transformResponse: (response: { data: RedditApiResponse}) => {
         return response.data;
       },
@@ -40,7 +40,7 @@ const redditApi = createApi({
         currentCache.children.push(...newItems.children)
       },
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.after !== previousArg?.after
+        return currentArg !== previousArg
       },
     }),
   }),
@@ -58,4 +58,4 @@ export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
 
-export const { useGetRedditDataQuery } = redditApi
+export const { useGetRedditDataQuery, useLazyGetRedditDataQuery } = redditApi
