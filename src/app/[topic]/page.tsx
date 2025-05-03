@@ -1,37 +1,22 @@
 'use client'
 import PostLayout from "@/components/posts/PostLayout";
-import { useLazyGetRedditDataQuery } from "../store";
-import { use, useEffect} from "react";
+import { use } from "react";
 import { searchForEndpoint } from "@/utils/topicUtils";
-import { useInView } from "react-intersection-observer";
+import { useMultipleInViews } from "@/hooks/useMultipleInViews";
+import useGetData from "@/hooks/useGetData";
+import LoadingLayout from "@/components/loading/LoadingLayout";
 
 
 export default function Home({params}:{ params: Promise<{ topic: string }>} ) {
   const { topic } = use(params);
   const topicEndpoint = searchForEndpoint(decodeURIComponent(topic))
-  if(!topicEndpoint) throw Error('');
-
-  const [trigger, { data, isFetching, isError }] = useLazyGetRedditDataQuery();
-  useEffect(() => {
-    trigger({ topic: topicEndpoint });
-  }, []);
-  const PostArray = data?.children ?? []
-
-  const { ref, inView } = useInView({
-    threshold: 1.0,
-  });
-  useEffect(() => {
-    if(inView && !isFetching && data?.after){
-      trigger({ topic: topicEndpoint, after: data?.after})
-    }
-  },[inView, isFetching, data?.after])
-
+  if(!topicEndpoint) throw Error('Undefined Topic');
+  const inViews = useMultipleInViews(2);
+  const { data, initialFetch, isFetching, isUninitialized, isError, viewRefs } = useGetData(topicEndpoint, inViews)
+  if (initialFetch) return <LoadingLayout/>
   if (isError) throw Error('Failed to fetch data.');
-  if (!data && isFetching) return <div>Loading...</div>;
-  return (
-    <>
-      <PostLayout Posts={PostArray} lastPostRef={!isFetching ? ref : undefined}/>
-    </>
-    
-  );
+  if (isUninitialized) return <LoadingLayout/> 
+  if (!data) return Error('No data returned.');
+  return <PostLayout Posts={data} viewRefs={!isFetching ? viewRefs : undefined} isFetching={isFetching}/>
 }
+

@@ -1,5 +1,5 @@
+'use client'
 import { useEffect, useState } from "react";
-
 
 export function useWindowWidth(width: number = 1000){
   const [isWindowWide, setIsWindowWide] = useState<number>(width);
@@ -15,7 +15,7 @@ export function useWindowWidth(width: number = 1000){
     }
   
     return () => {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== 'undefined') {      
         window.removeEventListener('onload', handleResize);
         window.removeEventListener('resize', handleResize);
       }
@@ -23,4 +23,3 @@ export function useWindowWidth(width: number = 1000){
   }, []);
   return isWindowWide;
 }
-
