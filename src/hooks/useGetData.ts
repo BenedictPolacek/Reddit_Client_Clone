@@ -5,7 +5,7 @@ import { InViewHookResponse } from "react-intersection-observer";
 
 
 export default function fetchData(topicEndpoint: string, views: InViewHookResponse[]) {
-    const [trigger, { data, isFetching, isError, isLoading, isUninitialized }] = useLazyGetRedditDataQuery();    
+    const [trigger, { data, isFetching, isError, error, isLoading, isUninitialized }] = useLazyGetRedditDataQuery();    
     useEffect(() => {
       trigger({ topic: topicEndpoint });
     }, [])
@@ -23,6 +23,7 @@ export default function fetchData(topicEndpoint: string, views: InViewHookRespon
         }
       })
     },[...inViews, isFetching, data?.after])
-
-    return { data: data?.children, initialFetch: isLoading, isFetching, isUninitialized, isError, viewRefs }
+    if (isError) throw Error('Failed to fetch data.', {cause: error});
+    if (data?.children.length === 0) throw Error('No posts returned.');
+    return { data: data?.children, initialFetch: isLoading, isFetching, isUninitialized, viewRefs }
 }

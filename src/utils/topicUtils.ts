@@ -14,16 +14,17 @@ export function humanizePath(pathname: string){
   return pathname.replace(/_/g, ' ');
 }
 
-export function searchForEndpoint(topicName: string): string | undefined{
-  return topics.map(topicHead => {
-    // Case 1: Topic is a simple object with name and endpoint
-    if ('name' in topicHead && typeof topicHead.name === 'string') {
+export function searchForEndpoint(topicName: string): string{
+  const topicEndpoint = topics.map(topicHead => {
+    if ('name' in topicHead && 'endpoint' in topicHead &&  typeof topicHead.name === 'string' && typeof topicHead.endpoint === 'string') {
       return topicHead.name === topicName ? topicHead.endpoint : undefined;
     }
 
-    // Case 2: Topic is inside a category object (array of TopicObject)
-    const topicCategory = Object.values(topicHead)[0];
-    const foundTopic = topicCategory.find((topic: TopicObject) => topic.name === topicName);
+    const topicCategory: TopicObject[] = Object.values(topicHead)[0];
+    const foundTopic = topicCategory.find((topic) => topic.name === topicName);
     return foundTopic ? foundTopic.endpoint : undefined;
   }).find(endpoint => endpoint !== undefined);
+  
+  if(!topicEndpoint) throw Error('Undefined Topic');
+  return topicEndpoint;
 }

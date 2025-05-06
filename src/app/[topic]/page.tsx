@@ -9,14 +9,12 @@ import LoadingLayout from "@/components/loading/LoadingLayout";
 
 export default function Home({params}:{ params: Promise<{ topic: string }>} ) {
   const { topic } = use(params);
-  const topicEndpoint = searchForEndpoint(decodeURIComponent(topic))
-  if(!topicEndpoint) throw Error('Undefined Topic');
+  const topicEndpoint = searchForEndpoint(decodeURIComponent(topic));
   const inViews = useMultipleInViews(2);
-  const { data, initialFetch, isFetching, isUninitialized, isError, viewRefs } = useGetData(topicEndpoint, inViews)
-  if (initialFetch) return <LoadingLayout/>
-  if (isError) throw Error('Failed to fetch data.');
-  if (isUninitialized) return <LoadingLayout/> 
-  if (!data) return Error('No data returned.');
-  return <PostLayout Posts={data} viewRefs={!isFetching ? viewRefs : undefined} isFetching={isFetching}/>
+  const { data, initialFetch, isFetching, isUninitialized, viewRefs } = useGetData(topicEndpoint, inViews);
+
+  if (initialFetch || isUninitialized) return <LoadingLayout/>
+  if (!data) throw Error('No data returned');
+  return <PostLayout Posts={data} viewRefs={viewRefs} isFetching={isFetching}/>
 }
 
