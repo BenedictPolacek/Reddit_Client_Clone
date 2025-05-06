@@ -5,7 +5,7 @@ import DrawerSideBar from "./navBarRight/navDrawer/DrawerSideBar"
 
 export default function NavBar() {
   return (
-    <Navbar fluid rounded>
+    <Navbar fluid rounded id="navbar">
           <LeftNavbarSide/>
           <RightNavbarSide>
             <DrawerSideBar/>

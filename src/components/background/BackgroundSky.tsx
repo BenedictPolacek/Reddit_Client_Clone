@@ -2,10 +2,9 @@
 import './backgroundStyle.css';
 import { useWindowWidth } from '@/hooks/useWindowWidth';
 
-
 export default function Background() {
   const backgroundWidth = 1878;
-  const windowWidth = useWindowWidth(backgroundWidth)
+  const windowWidth = useWindowWidth(backgroundWidth * 2)
   const bgDifference = Math.ceil( windowWidth / backgroundWidth);
   const bgArray = Array.from({ length: bgDifference }, (_, i) => {
     return (

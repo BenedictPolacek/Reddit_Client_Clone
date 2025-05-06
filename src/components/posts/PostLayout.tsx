@@ -1,14 +1,14 @@
-import { getHalf } from "@/utils/postUtils"
-import type { PostData } from "@/app/store";
 import Post from "./Post";
+import Skeleton from "../loading/Skeleton";
 import { useWindowWidth } from "@/hooks/useWindowWidth";
 import { ViewRef } from "@/hooks/useMultipleInViews";
-import Skeleton from "../loading/Skeleton";
+import { getHalf } from "@/utils/postUtils"
+import type { PostData } from "@/app/store";
 
-export default function postLayout({Posts, viewRefs, isFetching}: { Posts:PostData[], viewRefs?: ViewRef[], isFetching: boolean}) {
+export default function postLayout({Posts, viewRefs, isFetching}: { Posts:PostData[], viewRefs: ViewRef[], isFetching: boolean}) {
   const windowWidth = useWindowWidth()
   const PostUIArray = Posts.map(({data}, index) => {
-    let isLast = viewRefs?.some((_, i) => index === Posts.length - (i + 1))
+    const isLast = viewRefs?.some((_, i) => index === Posts.length - (i + 1))
     const postData = {
       author: data.author,
       title: data.title,
@@ -18,7 +18,7 @@ export default function postLayout({Posts, viewRefs, isFetching}: { Posts:PostDa
       pictureUrl: data.url,
       thumbnailUrl: data.thumbnail,
     };
-    return <Post {...postData} key={`post-${index}`} lastRef={isLast && viewRefs ? viewRefs[Posts.length - index - 1] : undefined}/>
+    return <Post {...postData} key={`post-${index}`} lastRef={isLast && !isFetching ? viewRefs[Posts.length - index - 1] : undefined}/>
   });
   const FirstHalf = getHalf(PostUIArray, 1)
   const SecondHalf = getHalf(PostUIArray, 2)

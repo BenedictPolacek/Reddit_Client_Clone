@@ -52,7 +52,6 @@ export const topics: TopicHead[] = [
   },
   {
     "Pop Culture": [
-      { name: "Celebrities", endpoint: "celebrities" },
       { name: "Creators_&_Influencers", endpoint: "Influencersinthewild" },
       { name: "Generations_&_Nostalgia", endpoint: "nostalgia" },
       { name: "Podcast", endpoint: "podcasts" },
