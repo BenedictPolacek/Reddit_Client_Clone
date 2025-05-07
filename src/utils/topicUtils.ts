@@ -2,6 +2,8 @@ import { TopicObject, topics } from '@/data/topics';
 
 export function matchPath(pathname: string): boolean {
   const normalizedPath = pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+  console.log(pathname)
+  if(normalizedPath === '/search') return true;
   return topics.some((topicHead) => {
     if('name' in topicHead && typeof topicHead.name === 'string') return ('/' + topicHead.name) === normalizedPath;
     
@@ -24,7 +26,7 @@ export function searchForEndpoint(topicName: string): string{
     const foundTopic = topicCategory.find((topic) => topic.name === topicName);
     return foundTopic ? foundTopic.endpoint : undefined;
   }).find(endpoint => endpoint !== undefined);
-  
-  if(!topicEndpoint) throw Error('Undefined Topic');
-  return topicEndpoint;
+
+  if(!topicEndpoint && topicName !== 'search') throw Error('Undefined Topic');
+  return topicEndpoint ? topicEndpoint : topicName;
 }
