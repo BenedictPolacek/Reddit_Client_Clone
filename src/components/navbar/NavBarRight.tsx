@@ -25,7 +25,7 @@ export default function RightNavbarSide({children}: {children: React.ReactNode})
         <SearchBar formClassName='hidden w-62'/>
         <Button onClick={handleOpen} color="light" className="ml-2 h-12 pl-4 md:h-13">
           <HiMenuAlt1 className="h-5 w-5 mr-2"/>
-          <div className="font-sans font-normal text-base md:max-w-30 max-w-25 truncate">{topic}</div>
+          <div className="font-sans font-normal text-base md:max-w-30 max-w-25 truncate">{topic !== 'search' ? topic : 'Topics' }</div>
         </Button>
       </div>
 

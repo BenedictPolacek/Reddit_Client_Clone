@@ -1,6 +1,4 @@
 'use client'
-import Link from 'next/link';
-import { NextPageContext } from 'next';
 import { MdErrorOutline } from "react-icons/md";
 import { usePathname } from 'next/navigation';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
