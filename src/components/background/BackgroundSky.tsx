@@ -15,6 +15,5 @@ export default function Background() {
       </div>
     );
   });
-
   return <>{bgArray}</>;
 }
