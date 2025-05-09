@@ -24,7 +24,7 @@ export default function PostHeader({author, postedAgo, videoUrl, pictureUrl}
       }
       {
         pictureUrl 
-        ? <img src={pictureUrl} className="rounded-md h-auto object-cover mt-3"/>
+        ? <picture><img src={pictureUrl} alt='Post picture' className="rounded-md h-auto w-full object-cover mt-3"/></picture>
         : <></>
       }     
     </div>

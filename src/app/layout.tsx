@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
+import { Suspense } from "react";
 import BackgroundSky from "@/components/background/BackgroundSky";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ReduxProvider from "../lib/ReduxProvider";
+import LoadingLayout from "@/components/loading/LoadingLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,10 +35,12 @@ export default async function RootLayout({
       >
         <BackgroundSky/>
         <Header/>
-        <main>
-          <ReduxProvider>
-            {children}
-          </ReduxProvider> 
+        <main>      
+          <Suspense fallback={<LoadingLayout />}>
+            <ReduxProvider>
+              {children}
+            </ReduxProvider> 
+          </Suspense>
         </main>
         <Footer/>
       </body>
