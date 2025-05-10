@@ -19,8 +19,8 @@ function Post({author, title, text, createdAt, pictureUrl, thumbnailUrl, videoUr
   const hasVideo = videoUrl ? videoUrl : undefined;
   const hasPicture = isPictureFormat(pictureUrl) && !hasVideo ? pictureUrl : undefined;
   const hasThumbnail = isPictureFormat(thumbnailUrl) && !hasPicture && !hasVideo ? thumbnailUrl : undefined;
-    return (
-    <Card className='m-8 w-70 xs:w-85 sm:w-130 md:w-170 lg:w-105 xl:w-140 2xl:w-180'>
+  return (
+    <Card className='max-w-180 w-full mb-6'>
         <PostHeader 
           author={author} 
           postedAgo={postedAgo} 
