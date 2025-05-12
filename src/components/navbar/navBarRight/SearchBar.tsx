@@ -3,7 +3,7 @@ import Form from 'next/form'
 
 export default function SearchBar({formClassName, buttonClassName}: {formClassName: string, buttonClassName?: string}) {
   return (
-    <Form action="/search" className={`${formClassName} max-w-md mx-auto md:w-70 sm:block lg:w-100`}> 
+    <Form action="/search" className={`${formClassName} sm:block max-w-110`}> 
         <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <div className="relative">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
