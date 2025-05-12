@@ -21,8 +21,8 @@ export default function RightNavbarSide({children}: {children: React.ReactNode})
   const topic = humanizePath(pathname.slice(1));
   return (
     <>
-      <div className="flex md:order-2">
-        <SearchBar formClassName='hidden w-62'/>
+      <div className="flex md:order-2 sm:basis-2/3 justify-end">
+        <SearchBar formClassName='hidden basis-4/5'/>
         <Button onClick={handleOpen} color="light" className="ml-2 h-12 pl-4 md:h-13">
           <HiMenuAlt1 className="h-5 w-5 mr-2"/>
           <div className="font-sans font-normal text-base md:max-w-30 max-w-25 truncate">{topic !== 'search' ? topic : 'Topics' }</div>
