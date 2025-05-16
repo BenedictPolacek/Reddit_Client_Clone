@@ -21,7 +21,7 @@ export default function ErrorPage({ error, reset }: {error: Error & { cause: Fet
       prevSearchTerm.current = currentSearchTerm;
       reset() 
     }
-  },[currentSearchTerm])
+  },[currentSearchTerm, reset])
   return (
     <>
       <div className='pr-9 pl-9'>

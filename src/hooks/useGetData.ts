@@ -1,7 +1,6 @@
 'use client'
 import { useLazyGetRedditDataQuery } from "@/lib/api";
-
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function useGetData(topicEndpoint: string, searchTerm: string | undefined, inViews: boolean[]) {
   const [trigger, { data, isFetching, isError, error, isUninitialized }] = useLazyGetRedditDataQuery();

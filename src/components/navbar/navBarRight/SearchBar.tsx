@@ -1,7 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useState, useTransition } from 'react'
-import { useFormStatus } from 'react-dom';
 
 export default function SearchBar({formClassName, buttonClassName}: {formClassName: string, buttonClassName?: string}) {
   const [ term, setTerm ] = useState('');
