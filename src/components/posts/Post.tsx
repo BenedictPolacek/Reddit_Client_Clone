@@ -13,28 +13,28 @@ function Post({author, title, text, createdAt, pictureUrl, thumbnailUrl, videoUr
     if(inViewHandler){
       inViewHandler(inView)
     }
-  }, [inView])
+  }, [inView, inViewHandler])
 
   const postedAgo = getTimeAgo(createdAt);
   const hasVideo = videoUrl ? videoUrl : undefined;
   const hasPicture = isPictureFormat(pictureUrl) && !hasVideo ? pictureUrl : undefined;
   const hasThumbnail = isPictureFormat(thumbnailUrl) && !hasPicture && !hasVideo ? thumbnailUrl : undefined;
   return (
-    <Card className='max-w-180 w-full mb-6'>
-        <PostHeader 
-          author={author} 
-          postedAgo={postedAgo} 
-          videoUrl={hasVideo} 
-          pictureUrl={hasPicture}
-        />
-        <PostTitle 
-          title={title} 
-          thumbnailUrl={hasThumbnail} 
-          lastRef={ref}
-        />
-        <PostText 
-          text={text}
-        />
+    <Card className='max-w-180 mb-6 w-full'>
+      <PostHeader 
+        author={author} 
+        postedAgo={postedAgo} 
+        videoUrl={hasVideo} 
+        pictureUrl={hasPicture}
+      />
+      <PostTitle 
+        title={title} 
+        thumbnailUrl={hasThumbnail} 
+        lastRef={ref}
+      />
+      <PostText 
+        text={text}
+      />
     </Card>
   )
 }
