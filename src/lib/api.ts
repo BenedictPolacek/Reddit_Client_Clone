@@ -36,17 +36,17 @@ export const redditApi = createApi({
         return response.data;
       },
       serializeQueryArgs: ({ queryArgs, endpointName }) => {
-        return `${endpointName}/${queryArgs.topic}/${queryArgs.searchTerm}`;
+        return `${endpointName}/${queryArgs.topic}/${queryArgs.searchTerm || ''}`;
       },
       merge: (currentCache, newItems) => {
         currentCache.after = newItems.after;
         currentCache.children.push(...newItems.children)
       },
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg !== previousArg
+        return currentArg?.after !== previousArg?.after || currentArg?.searchTerm !== previousArg?.searchTerm || currentArg?.topic !== previousArg?.topic
       },
     }),
   }),
-})
+});
 
 export const { useGetRedditDataQuery, useLazyGetRedditDataQuery } = redditApi;
