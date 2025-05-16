@@ -22,7 +22,7 @@ export default function PostLayout({data, isFetching}: { data: JSX.Element[] | n
       </div>
       <div className="flex lg:hidden justify-center">
         <div className="flex flex-col basis-4/5 grow-0 items-center">
-          {data && windowWidth < lg ? data : null}
+          {windowWidth && data && windowWidth < lg ? data : null}
           {isFetching ? <Skeleton/> : null}
         </div>
       </div>
