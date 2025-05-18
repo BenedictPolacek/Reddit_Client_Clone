@@ -7,6 +7,10 @@ export type TopicsGroup = {
 }
 export type TopicHead = TopicObject | TopicsGroup
 
+export function isTopicGroup(topicHead: TopicHead): topicHead is TopicsGroup {
+  return Array.isArray(Object.values(topicHead)[0]);
+}
+
 export const topics: TopicHead[] = [
   {
     "Internet Culture (Viral)": [
