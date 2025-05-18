@@ -13,39 +13,33 @@ const renderWithSidebar = (topic: string) => {
     </Sidebar>
   );
 }
+
 describe('TopicItem', () => {
   it('displays topic name', () => {
     const input = 'Sport';
     const output = 'Sport';
     renderWithSidebar(input);
 
-    const myElem = screen.getByText(output);
+    const topicItem = screen.getByText(output);
 
-    expect(myElem).toBeInTheDocument();
+    expect(topicItem).toBeInTheDocument();
   });
-  it('converts underscores to spaces in topic name', () => {
+  it('displays topic name with converted underscores to spaces', () => {
     const input = 'Adventure_Games';
     const output = 'Adventure Games';
     renderWithSidebar(input);
 
-    const myElem = screen.getByText(output);
+    const topicItem = screen.getByText(output);
 
-    expect(myElem).toBeInTheDocument();
+    expect(topicItem).toBeInTheDocument();
   });
-  it('has Link component', () => {
-    const input = 'Animals_&_Pets';
-    renderWithSidebar(input);
-
-    const myElem = screen.getByRole('link');
-
-    expect(myElem).toBeInTheDocument()
-  });
-  it('has href attribute', () => {
+  it('renders Link component with correct href based on input', () => {
     const input = 'Cringe_&_Facepalm';
     renderWithSidebar(input);
 
-    const myElem = screen.getByRole('link');
+    const link = screen.getByRole('link');
 
-    expect(myElem).toHaveAttribute('href', `/${input}`);
+    expect(link).toBeInTheDocument()
+    expect(link).toHaveAttribute('href', `/${input}`);
   });
 });

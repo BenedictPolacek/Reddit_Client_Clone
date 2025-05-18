@@ -3,10 +3,10 @@ import NavDrawer from "../NavDrawer"
 
 describe('NavDrawer', () => {
   it('renders children', () => {
-    render(<NavDrawer isOpen={false} onHandleClose={() => {}}><div data-testid="child">Test child</div></NavDrawer> )
+    render(<NavDrawer isOpen={false} onHandleClose={() => {}}><div data-testid="children">Test child</div></NavDrawer> )
 
-    const myElem = screen.getByText('Test child');
+    const children = screen.getByTestId('children');
 
-    expect(myElem).toBeInTheDocument();
+    expect(children).toBeInTheDocument();
   });
 })
