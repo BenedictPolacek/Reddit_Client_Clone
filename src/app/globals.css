@@ -2,6 +2,7 @@
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../../.flowbite-react/class-list.json";
 
+@custom-variant dark (&:where(.dark, .dark *));
 @layer utilities {
     @keyframes fade-in-up {
       from {
@@ -18,7 +19,8 @@
       animation: fade-in-up 0.5s ease-out forwards;
     }
   }
-  @theme {
-    --breakpoint-xs: 23rem;
-    --breakpoint-laptop: 85rem;
-  }
+@theme {
+  --breakpoint-xs: 23rem;
+  --breakpoint-laptop: 85rem;
+}
+
