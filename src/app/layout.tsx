@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ReduxProvider from "../lib/ReduxProvider";
 import LoadingLayout from "@/components/loading/LoadingLayout";
+import { ThemeModeScript } from "flowbite-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,9 +31,13 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
+            <head>
+        <ThemeModeScript defaultMode="dark"/>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}
       >
+
         <BackgroundSky/>
         <Header/>
         <main>      
