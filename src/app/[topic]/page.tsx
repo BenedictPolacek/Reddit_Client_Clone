@@ -2,7 +2,7 @@
 import PostLayout from "@/components/posts/PostLayout";
 import LoadingLayout from "@/components/loading/LoadingLayout";
 import { use } from "react";
-import { searchForEndpoint } from "@/utils/topicUtils";
+import { humanizePath, searchForEndpoint } from "@/utils/topicUtils";
 import useGetData from "@/hooks/useGetData";
 import { useInViewState } from "@/hooks/useInViewStates";
 import Post from "@/components/posts/Post";
@@ -15,7 +15,7 @@ export default function Home({params, searchParams}:{params: Params, searchParam
   const { term: searchTerm } = use(searchParams);
   const topicEndpoint = searchForEndpoint(decodeURIComponent(topic))
   const { inViews, inViewHandler, inViewCount} = useInViewState(2)
-  const { data, initialFetch, isFetching, isUninitialized } = useGetData(topicEndpoint, searchTerm, inViews);
+  const { data, initialFetch, isFetching, isUninitialized } = useGetData(topicEndpoint, searchTerm ? humanizePath(searchTerm): undefined, inViews);
   
   if (initialFetch || isUninitialized) return <LoadingLayout/>
   if (!data) throw Error('No data returned');
