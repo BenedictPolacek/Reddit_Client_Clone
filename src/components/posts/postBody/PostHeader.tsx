@@ -1,3 +1,4 @@
+import { LoadingPicture } from '@/components/loading/Skeleton'
 import { HiOutlineClock, HiUserCircle } from 'react-icons/hi'
 
 export default function PostHeader({author, postedAgo, videoUrl, pictureUrl}
@@ -15,17 +16,15 @@ export default function PostHeader({author, postedAgo, videoUrl, pictureUrl}
         </div> 
       </div>
       { 
-        videoUrl 
-        ? <video className="rounded-md h-auto w-full mt-3" controls>
+        videoUrl && (
+          <video className="rounded-md h-auto w-full mt-3" controls data-testid='video-player'>
             <source src={videoUrl}/>
-            Your browser does not support the video tag.
+            <LoadingPicture data-testid='invalid url'/>
           </video>
-        : <></>
+        )
       }
       {
-        pictureUrl 
-        ? <picture><img src={pictureUrl} alt='Post picture' className="rounded-md h-auto w-full object-cover mt-3"/></picture>
-        : <></>
+        pictureUrl && (<picture><img src={pictureUrl} alt='Post picture' className="rounded-md h-auto w-full object-cover mt-3"/></picture>)
       }     
     </div>
   )
