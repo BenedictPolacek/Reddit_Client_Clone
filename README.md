@@ -1,6 +1,6 @@
 
 # Reddit Client Web App
-![License](https://img.shields.io/github/license/BenedictPolacek/Reddit_Client_Clone) ![Repo Size](https://img.shields.io/github/repo-size/BenedictPolacek/Reddit_Client_Clone)  
+[![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE) ![Repo Size](https://img.shields.io/github/repo-size/BenedictPolacek/Reddit_Client_Clone)  
 A lightweight, minimalist and modern alternative to Reddit’s official web client.
 
 ## 🔧 Built With
