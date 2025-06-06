@@ -11,7 +11,7 @@ export function matchPath(pathname: string): boolean {
     if(isTopicGroup(topicHead)){
       const topicCategory = Object.values(topicHead)[0];
       return topicCategory.some((topic: TopicObject) => ('/' + topic.name) === normalizedPath);
-    }
+    };
     return ('/' + topicHead.name) === normalizedPath;
   });
 }
