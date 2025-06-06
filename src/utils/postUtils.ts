@@ -16,5 +16,5 @@ export function getTimeAgo(createdAt: number): string {
 }
 
 export function isPictureFormat(url: string){
-    return url.endsWith('.png') || url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.svg')
+    return url.includes('.png') || url.includes('.jpg') || url.includes('.jpeg') || url.includes('.svg')
 }
