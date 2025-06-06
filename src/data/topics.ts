@@ -1,4 +1,4 @@
-export type TopicObject ={
+export type TopicObject = {
     name: string, 
     endpoint: string,
 }
@@ -79,18 +79,3 @@ export const topics: TopicHead[] = [
   { name: "Spooky", endpoint: "spooky_stories" },
   { name: "Cars", endpoint: "cars" }
 ];
-
-export function isTopicGroup(topicHead: TopicHead): topicHead is TopicsGroup {
-  return Array.isArray(Object.values(topicHead)[0]);
-}
-
-export function getAllTopics(): TopicObject[]{
-  return topics.flatMap((topicHead) => {
-    return isTopicGroup(topicHead) ? Object.values(topicHead)[0] : topicHead
-  })
-}
-export function getAllTopicGroups(): TopicsGroup[]{
-  return topics.filter((topicHead) => {
-    return isTopicGroup(topicHead)
-  })
-}

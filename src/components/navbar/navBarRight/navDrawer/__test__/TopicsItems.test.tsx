@@ -1,8 +1,20 @@
 import { Sidebar, SidebarItemGroup, SidebarItems } from "flowbite-react";
 import TopicsItems from "../TopicsItems";
 import { render, screen } from "@testing-library/react";
-import { getAllTopicGroups, getAllTopics } from "@/data/topics";
+import { TopicObject, topics, TopicsGroup } from "@/data/topics";
+import { isTopicGroup } from "@/utils/topicUtils";
 
+function getAllTopics(): TopicObject[]{
+  return topics.flatMap((topicHead) => {
+    return isTopicGroup(topicHead) ? Object.values(topicHead)[0] : topicHead
+  })
+};
+
+function getAllTopicGroups(): TopicsGroup[]{
+  return topics.filter((topicHead) => {
+    return isTopicGroup(topicHead)
+  })
+};
 const renderWithSidebar = () => {
   render(
     <Sidebar>
