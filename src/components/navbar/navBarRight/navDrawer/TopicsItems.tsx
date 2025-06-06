@@ -1,6 +1,7 @@
-import { isTopicGroup, TopicHead, TopicObject, topics } from "@/data/topics"
+import { TopicHead, TopicObject, topics } from "@/data/topics"
 import { SidebarCollapse } from "flowbite-react";
 import TopicItem from "./TopicItem";
+import { isTopicGroup } from "@/utils/topicUtils";
 
 export default function SideBarItems() {
   return (
