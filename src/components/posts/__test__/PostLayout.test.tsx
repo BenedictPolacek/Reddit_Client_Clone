@@ -11,11 +11,11 @@ jest.mock('../../../hooks/useWindowWidth', () => {
 
 describe('PostLayout', () => {
   const data = [
-    <div data-testid='test-item'></div>,
-    <div data-testid='test-item'></div>,
-    <div data-testid='test-item'></div>,
-    <div data-testid='test-item'></div>,
-    <div data-testid='test-item'></div>,
+    <div key='1' data-testid='test-item'></div>,
+    <div key='2' data-testid='test-item'></div>,
+    <div key='3' data-testid='test-item'></div>,
+    <div key='4' data-testid='test-item'></div>,
+    <div key='5' data-testid='test-item'></div>,
   ]
   describe('on small screens (<1024px)', () => {
     beforeAll(() => {
