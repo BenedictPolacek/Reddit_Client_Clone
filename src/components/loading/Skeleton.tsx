@@ -1,6 +1,6 @@
-export default function Skeleton() {
+export default function Skeleton({...rest}: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div role="status" className="w-full max-w-180 p-4 border border-gray-200 rounded-sm shadow-sm animate-pulse md:p-6 dark:border-gray-700">
+    <div {...rest} role="status" className="w-full max-w-180 p-4 border border-gray-200 rounded-sm shadow-sm animate-pulse md:p-6 dark:border-gray-700">
         <LoadingPicture/>
         <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
         <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>

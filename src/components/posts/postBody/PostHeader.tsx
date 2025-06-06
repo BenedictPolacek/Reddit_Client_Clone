@@ -1,8 +1,14 @@
 import { LoadingPicture } from '@/components/loading/Skeleton'
 import { HiOutlineClock, HiUserCircle } from 'react-icons/hi'
 
-export default function PostHeader({author, postedAgo, videoUrl, pictureUrl}
-  : {author: string, postedAgo: string, videoUrl?: string, pictureUrl?: string}) {
+export interface PostHeaderProps{
+  author: string, 
+  postedAgo: string, 
+  videoUrl?: string, 
+  pictureUrl?: string
+}
+
+export default function PostHeader({author, postedAgo, videoUrl, pictureUrl}: PostHeaderProps) {
   return(
     <div className='flex-col justify-items-center'>
       <div className="w-full flex justify-between mb-2 text-base">

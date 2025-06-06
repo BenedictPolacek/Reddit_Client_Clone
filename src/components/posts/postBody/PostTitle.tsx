@@ -1,5 +1,10 @@
+export interface PostTitleProps{
+  title: string, 
+  thumbnailUrl?: string, 
+  lastRef?: (node?: Element | null) => void
+}
 
-export default function PostTitle({title, thumbnailUrl, lastRef}:{title: string, thumbnailUrl?: string, lastRef?: (node?: Element | null) => void}) {
+export default function PostTitle({title, thumbnailUrl, lastRef}: PostTitleProps) {
   return (
     <div ref={lastRef} className="overflow-hidden" data-testid='title-elem'>
       {

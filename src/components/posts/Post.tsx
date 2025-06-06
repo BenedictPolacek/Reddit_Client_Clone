@@ -6,6 +6,18 @@ import { getTimeAgo, isPictureFormat } from "@/utils/postUtils";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
+export interface PostProps {
+  author: string, 
+  title: string, 
+  text?: string, 
+  createdAt: number, 
+  pictureUrl: string, 
+  thumbnailUrl: string, 
+  videoUrl?: string, 
+  isLast: boolean, 
+  inViewHandler: ((inView: boolean) => void) | undefined
+}
+
 function Post({author, title, text, createdAt, pictureUrl, thumbnailUrl, videoUrl, isLast, inViewHandler}
     :{author: string, title: string, text?: string, createdAt: number, pictureUrl: string, thumbnailUrl: string, videoUrl?: string, isLast: boolean, inViewHandler: ((inView: boolean) => void) | undefined}) {
   const [ ref, inView] = useInView({ threshold: 1.0, skip: !isLast })

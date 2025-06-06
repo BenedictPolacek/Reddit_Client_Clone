@@ -50,7 +50,6 @@ describe("PostHeader", () => {
     expect(skeleton).toBeInTheDocument();
     expect(imgElem).not.toBeInTheDocument();
   });
-
   it("displays image when picture is provided", () => {
     const pictureUrl = "https://i.redd.it/0hobp82uta3f1.jpeg";
     render(<PostHeader {...defaultObject} pictureUrl={pictureUrl} />);
