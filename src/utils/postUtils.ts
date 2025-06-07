@@ -1,4 +1,4 @@
-export function getHalf(array: React.ReactElement[], half: number){
+export function getHalf(array: React.ReactElement[], half: 1 | 2){
     return array.filter((_, index) => index % 2 === half - 1)
 }
 
