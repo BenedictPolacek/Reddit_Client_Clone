@@ -49,4 +49,4 @@ export const redditApi = createApi({
   }),
 });
 
-export const { useGetRedditDataQuery, useLazyGetRedditDataQuery } = redditApi;
+export const { useLazyGetRedditDataQuery  } = redditApi;

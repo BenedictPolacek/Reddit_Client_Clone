@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import useGetData from '../useGetData';
 import { useLazyGetRedditDataQuery } from '@/lib/api';
 
@@ -25,9 +25,10 @@ describe('useGetData', () => {
         isUninitialized: true,
       },
     ]);
-
-    renderHook(() => useGetData('topic', undefined, [false, false]));
-
+    await waitFor(() => {
+      renderHook(() => useGetData('topic', undefined, [false, false]));
+    })
+    
     expect(mockTrigger).toHaveBeenCalledWith({ topic: 'topic', searchTerm: undefined });
   });
   it('should call trigger if inViews contains true and has "after" data', async () => {
@@ -41,9 +42,9 @@ describe('useGetData', () => {
         isUninitialized: false,
       },
     ]);
-
-    renderHook(() => useGetData('topic', undefined, [true, false, false]));
-
+    act(() => {
+      renderHook(() => useGetData('topic', undefined, [true, false, false]));
+    })
     expect(mockTrigger).toHaveBeenCalledWith({
       topic: 'topic',
       searchTerm: undefined,
@@ -61,9 +62,9 @@ describe('useGetData', () => {
         isUninitialized: false,
       },
     ]);
-
-    renderHook(() => useGetData('topic', undefined, [true, false, false]));
-
+    act(() => {
+      renderHook(() => useGetData('topic', undefined, [true, false, false]));
+    })
     expect(mockTrigger).not.toHaveBeenCalled()
   })
   it('should not call trigger if isFetching is true and was initialized', () => {
@@ -77,9 +78,9 @@ describe('useGetData', () => {
         isUninitialized: false,
       },
     ]);
-
-    renderHook(() => useGetData('topic', undefined, [true, false, false]));
-
+    act(() => {
+      renderHook(() => useGetData('topic', undefined, [true, false, false]));
+    })
     expect(mockTrigger).not.toHaveBeenCalled();
   });
   it('should not call trigger more than 1 time if inViews contains still true', () => {
@@ -93,21 +94,22 @@ describe('useGetData', () => {
         isUninitialized: false,
       },
     ]);
-
-    const { rerender } = renderHook(({ topic, searchTerm, inViews }: 
-      {topic: string, searchTerm: string | undefined, inViews: boolean[]}) => useGetData(topic, searchTerm, inViews),
-    {
-      initialProps: {
-        topic: 'topic',
-        searchTerm: undefined,
-        inViews: [true, false, false],
-      },
-    });
-    rerender({ topic: 'topic', searchTerm: undefined, inViews: [true, false, false] });
-    rerender({ topic: 'topic', searchTerm: undefined, inViews: [true, false, false] });
+    act(() => {
+      const { rerender } = renderHook(({ topic, searchTerm, inViews }: 
+        {topic: string, searchTerm: string | undefined, inViews: boolean[]}) => useGetData(topic, searchTerm, inViews),
+      {
+        initialProps: {
+          topic: 'topic',
+          searchTerm: undefined,
+          inViews: [true, false, false],
+        },
+      });
+      rerender({ topic: 'topic', searchTerm: undefined, inViews: [true, false, false] });
+      rerender({ topic: 'topic', searchTerm: undefined, inViews: [true, false, false] });
+    })
     expect(mockTrigger).toHaveBeenCalledTimes(1);
   });
-  it('should call trigger when searchTerm changes', () => {
+  it('should call trigger when searchTerm changes', async () => {
     (useLazyGetRedditDataQuery as jest.Mock).mockReturnValue([
       mockTrigger,
       {
@@ -118,23 +120,26 @@ describe('useGetData', () => {
         isUninitialized: false,
       },
     ]);
-
-    const { rerender } = renderHook(({ topic, searchTerm, inViews }: 
-      {topic: string, searchTerm: string | undefined, inViews: boolean[]}) => useGetData(topic, searchTerm, inViews),
-    {
-      initialProps: {
+    
+    await waitFor(async () => {
+      const { rerender } = await renderHook(({ topic, searchTerm, inViews }: 
+        {topic: string, searchTerm: string | undefined, inViews: boolean[]}) => useGetData(topic, searchTerm, inViews),
+        {
+          initialProps: {
+            topic: 'search',
+            searchTerm: 'example1',
+            inViews: [false, false],
+          },
+        }
+      );
+    
+      expect(mockTrigger).toHaveBeenCalledWith({
         topic: 'search',
         searchTerm: 'example1',
-        inViews: [false, false],
-      },
-    });
+      });
 
-    expect(mockTrigger).toHaveBeenLastCalledWith({
-      topic: 'search',
-      searchTerm: 'example1',
-    });
-
-    rerender({ topic: 'search', searchTerm: 'example2', inViews: [false, false] });
+      await rerender({ topic: 'search', searchTerm: 'example2', inViews: [false, false] });
+    })
 
     expect(mockTrigger).toHaveBeenLastCalledWith({
       topic: 'search',
@@ -154,8 +159,11 @@ describe('useGetData', () => {
       },
     ]);
     expect.assertions(1);
+      
     try{
-      renderHook(() => useGetData('reactjs', 'hooks', [false]))
+      act(() => {
+        renderHook(() => useGetData('reactjs', 'hooks', [false]))
+      })
     } catch(error: any) {
       expect(error.message).toBe('Failed to fetch data.');
     }
@@ -174,7 +182,9 @@ describe('useGetData', () => {
 
     expect.assertions(1);
     try{
-      renderHook(() => useGetData('topic', 'hooks', [false]))
+      act(() => {
+        renderHook(() => useGetData('topic', 'hooks', [false]))
+      })
     } catch(error: any) {
       expect(error.message).toBe('No posts returned.');
     }
