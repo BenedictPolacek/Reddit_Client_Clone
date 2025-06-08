@@ -31,7 +31,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
-            <head>
+      <head>
         <ThemeModeScript defaultMode="dark"/>
       </head>
       <body
