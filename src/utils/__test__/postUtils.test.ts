@@ -2,17 +2,17 @@ import React from "react";
 import { getHalf, getTimeAgo, isPictureFormat } from "../postUtils";
 
 describe('getHalf', () => {
-  const makeElement = (label: string) => React.createElement('div', {children: label})
+  const makeElement = (label: string) => React.createElement('div', {}, label)
   const elements = ['A', 'B', 'C', 'D', 'E', 'F'].map(makeElement);
 
   test('returns elements at even indexes for half = 1', () => {
-    const Elems = getHalf(elements, 1) as React.ReactElement<any>[];
+    const Elems = getHalf(elements, 1) as React.ReactElement<React.HTMLAttributes<HTMLDivElement>>[];
     const result = Elems.map(e => e.props.children)
     expect(result).toEqual(['A', 'C', 'E']);
   });
 
   test('returns elements at odd indexes for half = 2', () => {
-    const Elems = getHalf(elements, 2) as React.ReactElement<any>[];
+    const Elems = getHalf(elements, 2) as React.ReactElement<React.HTMLAttributes<HTMLDivElement>>[];
     const result = Elems.map(e => e.props.children)
     expect(result).toEqual(['B', 'D', 'F']);
   });
@@ -28,9 +28,9 @@ describe('getHalf', () => {
   test('handles single-element array', () => {
     const single = [makeElement('X')];
 
-    const FirstHalf = getHalf(single, 1) as React.ReactElement<any>[];
+    const FirstHalf = getHalf(single, 1) as React.ReactElement<React.HTMLAttributes<HTMLDivElement>>[];
     const result1 = FirstHalf.map(e => e.props.children)
-    const SecondHalf = getHalf(single, 2) as React.ReactElement<any>[];
+    const SecondHalf = getHalf(single, 2) as React.ReactElement<React.HTMLAttributes<HTMLDivElement>>[];
     const result2 = SecondHalf.map(e => e.props.children)
 
     expect(result1).toEqual(['X']);
@@ -140,7 +140,7 @@ describe('isPictureFormat', () => {
     const url1 = 'https://example.com/file.pdf';
     const url2 = 'https://example.com/file.txt';
     const result1 = isPictureFormat(url1)
-    const result2 = isPictureFormat(url1)
+    const result2 = isPictureFormat(url2)
     expect(result1).toBe(false);
     expect(result2).toBe(false);
   });

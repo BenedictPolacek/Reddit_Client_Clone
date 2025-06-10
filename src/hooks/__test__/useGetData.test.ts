@@ -164,8 +164,10 @@ describe('useGetData', () => {
       act(() => {
         renderHook(() => useGetData('reactjs', 'hooks', [false]))
       })
-    } catch(error: any) {
-      expect(error.message).toBe('Failed to fetch data.');
+    } catch(error: unknown) {
+      if (error instanceof Error) {
+        expect(error.message).toBe('Failed to fetch data.');
+      }
     }
   });
   it('should throw error if data.children is empty', () => {
@@ -185,8 +187,10 @@ describe('useGetData', () => {
       act(() => {
         renderHook(() => useGetData('topic', 'hooks', [false]))
       })
-    } catch(error: any) {
-      expect(error.message).toBe('No posts returned.');
+    } catch(error: unknown) {
+      if (error instanceof Error) {
+        expect(error.message).toBe('No posts returned.');
+      }
     }
   });
 });

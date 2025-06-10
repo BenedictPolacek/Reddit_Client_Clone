@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import PostHeader, { PostHeaderProps } from "../postBody/PostHeader";
-import PostText, { PostTextProps } from "../postBody/PostText";
-import PostTitle, { PostTitleProps } from "../postBody/PostTitle";
+import PostHeader from "../postBody/PostHeader";
+import PostText from "../postBody/PostText";
+import PostTitle from "../postBody/PostTitle";
 import Post, { PostProps } from "../Post";
 import { getTimeAgo } from '../../../utils/postUtils';
 
@@ -14,7 +14,7 @@ const postHeaderTestId = 'post-header';
 jest.mock('../postBody/PostHeader', () => {
   return {
     __esModule: true,
-    default: jest.fn(({author, postedAgo, videoUrl, pictureUrl} : PostHeaderProps) => 
+    default: jest.fn(() => 
       <div data-testid={postHeaderTestId}></div>
     )
   }
@@ -24,7 +24,7 @@ const postTitleTestId = 'post-title';
 jest.mock('../postBody/PostTitle', () => {
   return {
     __esModule: true,
-    default: jest.fn(({title, thumbnailUrl, lastRef} : PostTitleProps) => 
+    default: jest.fn(() => 
       <div data-testid={postTitleTestId}></div>
     )
   }
@@ -34,7 +34,7 @@ const postTextTestId = 'post-text';
 jest.mock('../postBody/PostText', () => {
   return {
     __esModule: true,
-    default: jest.fn(({text} : PostTextProps) => 
+    default: jest.fn(() => 
       <div data-testid={postTextTestId}></div>
     )
   }
@@ -92,21 +92,15 @@ describe('Post', () => {
   it('renders PostHeader with default PostHeader props', () => {
     render(<Post {...defaultProps}/>);
 
-    const headerElem = screen.getByTestId(postHeaderTestId);
-
     expect(PostHeader).toHaveBeenCalledWith(expect.objectContaining(defaultPostHeaderProps), undefined);
   });
   it('renders PostTitle with default PostTitle props', () => {
     render(<Post {...defaultProps}/>);
 
-    const titleElem = screen.getByTestId(postTitleTestId);
-
     expect(PostTitle).toHaveBeenCalledWith(expect.objectContaining(defaultPostTitleProps), undefined);
   });
   it('renders PostText with default props', () => {
     render(<Post {...defaultProps}/>);
-
-    const textElem = screen.getByTestId(postTextTestId);
 
     expect(PostText).toHaveBeenCalledWith(expect.objectContaining({text: defaultProps.text}), undefined);
   });
