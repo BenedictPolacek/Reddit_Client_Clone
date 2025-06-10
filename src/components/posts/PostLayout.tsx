@@ -3,7 +3,12 @@ import { useWindowWidth } from "@/hooks/useWindowWidth";
 import { getHalf } from "@/utils/postUtils"
 import { JSX } from "react";
 
-export default function PostLayout({data, isFetching}: { data: JSX.Element[] | null, isFetching: boolean}) {
+export type PostLayout = {
+  data: JSX.Element[] | null, 
+  isFetching: boolean,
+} & React.HTMLAttributes<HTMLDivElement>;
+
+export default function PostLayout({data, isFetching}: PostLayout) {
   const windowWidth = useWindowWidth()
   const FirstHalf = data !== null ? getHalf(data, 1) : null
   const SecondHalf = data !== null ? getHalf(data, 2) : null

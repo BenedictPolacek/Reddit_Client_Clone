@@ -1,4 +1,4 @@
-import { getAllByTestId, render, screen, within } from "@testing-library/react"
+import { render, screen, within } from "@testing-library/react"
 import PostLayout from "../PostLayout"
 
 let width: number = 1024;

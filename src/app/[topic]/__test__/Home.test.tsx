@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React, { use } from "react";
 import Home from "../page";
 import useGetData from "@/hooks/useGetData";
@@ -9,9 +9,10 @@ import Post from "@/components/posts/Post";
 jest.mock("../../../hooks/useGetData", () => ({ __esModule: true, default: jest.fn(() => {})}))
 jest.mock("../../../hooks/useInViewStates", () => ({ __esModule: true, useInViewState: jest.fn()}));
 jest.mock("react", () => ({...jest.requireActual("react"), use: jest.fn()}));
-jest.mock("../../../components/loading/LoadingLayout", () => () => (
-  <div>Loading...</div>
-));
+jest.mock("../../../components/loading/LoadingLayout", () => ({
+  __esModule: true,
+  default: () => (<div>Loading...</div>)
+}));
 jest.mock('../../../components/posts/Post', () => ({
   __esModule: true,
   default: jest.fn(({ title }) => <div data-testid="post">{title}</div>)
@@ -94,7 +95,7 @@ describe("Home component", () => {
     searchParams,
   };
   beforeEach(() => {
-    (use as jest.Mock).mockImplementation((arg: any) => {
+    (use as jest.Mock).mockImplementation((arg: Promise<{topic: string} | { term: string | undefined}>) => {
       if (arg instanceof Promise) {
         return arg === params ? paramsValue : searchParamsValue;
       }
@@ -117,7 +118,7 @@ describe("Home component", () => {
       data: undefined,
     });
 
-    render(<Home params={params} searchParams={searchParams} />);
+    render(<Home {...setupParams} />);
 
     expect(screen.getByText("Loading...")).toBeInTheDocument(); 
   });
@@ -130,7 +131,7 @@ describe("Home component", () => {
       data: undefined,
     });
 
-    expect(() => render(<Home params={params} searchParams={searchParams} />)).toThrow("No data returned");
+    expect(() => render(<Home {...setupParams} />)).toThrow("No data returned");
   });
 
   it("renders posts and passes them to PostLayout", () => {
@@ -141,7 +142,7 @@ describe("Home component", () => {
       isUninitialized: false,
     });
 
-    render(<Home params={params} searchParams={searchParams} />);
+    render(<Home {...setupParams} />);
     
     expect(screen.getAllByTestId("post")).toHaveLength(mockPosts.length);
     expect(screen.getByTestId("post-layout")).toBeInTheDocument();
@@ -162,7 +163,7 @@ describe("Home component", () => {
       isUninitialized: false,
     });
 
-    render(<Home params={params} searchParams={searchParams}/>);
+    render(<Home {...setupParams}/>);
     
     expect(Post).toHaveBeenCalledWith(
       expect.objectContaining({
