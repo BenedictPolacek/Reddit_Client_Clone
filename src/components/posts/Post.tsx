@@ -32,7 +32,7 @@ function Post({author, title, text, createdAt, pictureUrl, thumbnailUrl, videoUr
   const displayPicture = isPictureFormat(pictureUrl) && !displayVideo ? pictureUrl : undefined;
   const displayThumbnail = isPictureFormat(thumbnailUrl) && !displayPicture && !displayVideo ? thumbnailUrl : undefined;
   return (
-    <Card className='max-w-180 mb-6 w-full'>
+    <Card className='max-w-180 mb-6 w-full' data-testid='card'>
       <PostHeader 
         author={author} 
         postedAgo={postedAgo} 
