@@ -11,7 +11,7 @@ export default function useGetData(topicEndpoint: string, searchTerm: string | u
   useEffect(() => {
     if(isUninitialized || prevSearchTerm.current !== searchTerm){
       setIsInitialLoading(true)
-      trigger({ topic: topicEndpoint, searchTerm: searchTerm }).finally(() => setIsInitialLoading(false));;
+      trigger({ topic: topicEndpoint, after: null, searchTerm: searchTerm }).finally(() => setIsInitialLoading(false));;
       prevSearchTerm.current = searchTerm;
     }
     if(inViews.some(Boolean) && !isFetching && data?.after && !prevInViewState.current){

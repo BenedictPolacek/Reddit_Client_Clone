@@ -17,21 +17,21 @@ export interface PostData {
   }
 }
 export interface RedditApiResponse {
-  after: string;
+  after: string | null;
   children: PostData[] 
 }
-
+export function makeRedditEndpoint({topic, after, searchTerm}: {topic: string,  after: string | null, searchTerm?: string}){
+  if(searchTerm && topic === 'search'){
+    return `search/.json?q=${searchTerm}&limit=6&after=${after}`;
+  }
+  return `r/${topic}.json?limit=10&after=${after}`;
+}
 export const redditApi = createApi({
   reducerPath: 'redditApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://www.reddit.com/' }),
   endpoints: (build) => ({
-    getRedditData: build.query<RedditApiResponse, {topic: string, searchTerm?: string, after?: string}>({
-      query: ({topic, searchTerm, after}) => {    
-        if(searchTerm && topic === 'search'){
-          return `search/.json?q=${searchTerm}&limit=6&after=${after}`
-        }
-        return `r/${topic}.json?limit=10&after=${after}`;
-      },
+    getRedditData: build.query<RedditApiResponse, {topic: string,  after: string | null, searchTerm?: string}>({
+      query: makeRedditEndpoint,
       transformResponse: (response: { data: RedditApiResponse}) => {
         return response.data;
       },
