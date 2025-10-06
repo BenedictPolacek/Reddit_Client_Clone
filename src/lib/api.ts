@@ -28,7 +28,7 @@ export function makeRedditEndpoint({topic, after, searchTerm}: {topic: string,  
 }
 export const redditApi = createApi({
   reducerPath: 'redditApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://www.reddit.com/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://www.reddit.com/', mode: "cors"}),
   endpoints: (build) => ({
     getRedditData: build.query<RedditApiResponse, {topic: string,  after: string | null, searchTerm?: string}>({
       query: makeRedditEndpoint,
